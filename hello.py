@@ -1,10 +1,13 @@
-$ pip install gunicorn
-  $ cat myapp.py
-    def app(environ, start_response):
-        data = b"Hello, World!\n"
-        start_response("200 OK", [
-            ("Content-Type", "text/plain"),
-            ("Content-Length", str(len(data)))
-        ])
-        return iter([data])
-  $ gunicorn -w 4 myapp:app
+def app(environ, start_response):
+    # Returns a dictionary in which the values are lists
+
+    data = environ['QUERY_STRING']
+    d = '\n'.join(str(data).split("&"))
+
+    status = '200 OK'
+    response_headers = [
+        ('Content-type','text/plain'),
+        ('Content-Length', str(len(data)))
+    ]
+    start_response(status, response_headers)
+    return [d]
