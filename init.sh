@@ -1,4 +1,4 @@
-sudo pip install --upgrade django==1.9.4
+sudo pip install --upgrade django==1.10.5
 
 sudo ln -sf /home/box/web/etc/nginx.conf  /etc/nginx/sites-enabled/default
 sudo /etc/init.d/nginx restart
